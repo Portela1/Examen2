@@ -120,9 +120,15 @@ public class DNASequence {
 	public static DNASequence concatenate(ArrayList<DNASequence> list) {
 		DNASequence r = new DNASequence("","dna");
 		
-			for(DNASequence i:list) {
-				r.append(i);
+		if(list.size() == 0) {
+			return r;
+		}
+		
+		
+		
+		for(int i = 0 ;i<list.size(); i++) {
 			
+			r = r.append(list.get(i));
 		}
 		
 		

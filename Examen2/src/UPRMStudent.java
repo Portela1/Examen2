@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class UPRMStudent {
 	
 	private String studentId;
@@ -108,18 +110,30 @@ public class UPRMStudent {
 	 * Returns empty array (length == 0) if no students belong to the program
 	 */
 	public static UPRMStudent[] filterByProgram(String program, UPRMStudent[] roster) {
+		UPRMStudent[] r = new UPRMStudent[roster.length];
 		
-		if(roster.length == 0) {
+		int count = 0;
+		for(int i = 0; i<roster.length; i++) {
+			if(roster[i].getAcademicProgram().equals(program)) 
+			{
+				r[count] = roster[i];
+				count++;
+			}
+		}
+		UPRMStudent[] r1 = new UPRMStudent[count];
+		
+		for(int i = 0; i<count;i++) {
+			r1[i] = r[i];
+		}
+		
+		
+		
+		if(roster.length == 0 || count == 0) {
 			return new UPRMStudent[0];
 		}
 		else {
-			for (int i = 0; i< roster.length; i++) {
-				if(roster[i].academicProgram == program) {
-					
-				}
-			}
+		return r1;
 		}
-		return new UPRMStudent[0];
 	}
 
 	/* Returns the new course roster resulting from adding the
@@ -128,12 +142,27 @@ public class UPRMStudent {
 	 * the course.
 	 */
 	public UPRMStudent[] append(UPRMStudent[] courseRoster) {
-		UPRMStudent[] courseRoster1 = new UPRMStudent[courseRoster.length+1];
-		
-		return courseRoster;
 		
 		
-		
+		if(courseRoster.length == 0) {
+			UPRMStudent[] r1 = new UPRMStudent[1];
+			r1[0] = this;
+			return r1;
+		}
+		else if(courseRoster.length == 1) {
+			UPRMStudent[] r1 = new UPRMStudent[2];
+			r1[0] = courseRoster[0];
+			r1[1] = this;
+			return r1;
+		}
+		else {
+			UPRMStudent[] r1 = new UPRMStudent[courseRoster.length+1];
+			for(int i = 0;i<courseRoster.length;i++) {
+				r1[i] = courseRoster[i];
+			}
+			r1[r1.length-1] = this;
+			return r1;
+		}
 		
 		
 		
